@@ -55,9 +55,9 @@ while ret:
     results = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
     
     violate = set()
-		if len(results) >= 2:
-			centroids = np.array([r[2] for r in results])
-			D = dist.cdist(centroids, centroids, metric="euclidean")
+	if len(results) >= 2:
+		centroids = np.array([r[2] for r in results])
+		D = dist.cdist(centroids, centroids, metric="euclidean")
 
 		for i in range(0, D.shape[0]):
 			for j in range(i + 1, D.shape[1]):
@@ -65,19 +65,19 @@ while ret:
 						violate.add(i)
 						violate.add(j)
 
-		for (i, (prob, bbox, centroid)) in enumerate(results):
-			(startX, startY, endX, endY) = bbox
-			(cX, cY) = centroid
-			color = (0, 255, 0)
+	for (i, (prob, bbox, centroid)) in enumerate(results):
+		(startX, startY, endX, endY) = bbox
+		(cX, cY) = centroid
+		color = (0, 255, 0)
 
-			if i in violate:
-				color = (0, 0, 255)
+		if i in violate:
+			color = (0, 0, 255)
 
-			cv2.rectangle(img, (startX, startY), (endX, endY), color, 2)
-			cv2.circle(img, (cX, cY), 5, color, 1)
+		cv2.rectangle(img, (startX, startY), (endX, endY), color, 2)
+		cv2.circle(img, (cX, cY), 5, color, 1)
 
-		txt = "Social Distancing Violations Detected: {}".format(len(violate))
-		cv2.putText(img, txt, (10, img.shape[0] - 25), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (0, 0, 255), 3)
+	txt = "Social Distancing Violations Detected: {}".format(len(violate))
+	cv2.putText(img, txt, (10, img.shape[0] - 25), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (0, 0, 255), 3)
 
 
     frame = cv2.flip(img, 0)
