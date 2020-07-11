@@ -75,11 +75,11 @@ while ret:
 
 		cv2.rectangle(img, (startX, startY), (endX, endY), color, 2)
 		cv2.circle(img, (cX, cY), 5, color, 1)
-                      
+
 	txt = "Social Distancing Violations Detected: {}".format(len(violate))
 	cv2.putText(img, txt, (10, img.shape[0] - 25), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (0, 0, 255), 3)
 
-    
+
     frame = cv2.flip(img, 0)
     out.write(frame)
 
