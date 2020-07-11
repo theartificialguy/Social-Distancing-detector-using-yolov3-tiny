@@ -59,8 +59,8 @@ while ret:
 			centroids = np.array([r[2] for r in results])
 			D = dist.cdist(centroids, centroids, metric="euclidean")
 
-			for i in range(0, D.shape[0]):
-				for j in range(i + 1, D.shape[1]):
+		for i in range(0, D.shape[0]):
+			for j in range(i + 1, D.shape[1]):
 					if D[i, j] < MIN_DISTANCE:
 						violate.add(i)
 						violate.add(j)
